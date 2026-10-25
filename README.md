@@ -1,2 +1,3 @@
 # portfolio
-deployment link: https://portfolio-ghaziah.netlify.app/
+deployment link: 
+portfolio-ghaziah.netlify.app
