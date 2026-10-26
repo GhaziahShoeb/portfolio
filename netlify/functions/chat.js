@@ -8,9 +8,9 @@ Here is all the verified factual information about Ghaziah:
 [IDENTITY & PROFILE]
 - Name: Ghaziah Shoeb
 - Role: Data Analyst & AI Engineer (Focus: Data Analytics, SQL, Business Intelligence, Machine Learning)
-- Education: B.Tech in Computer Science & Engineering at VIT Bhopal (Batch: 2023–2027)
+- Education: B.Tech in Computer Science & Engineering at VIT (Batch: 2023–2027)
 - Current CGPA: 8.30 / 10.0
-- Location: Bhopal, Madhya Pradesh, India
+- Location: Shahjahanpur, Uttar Pradesh, India
 - Bio & Interests: Transforming raw data into actionable insights and building intelligent AI systems (RAG, Agentic AI, Data Analytics).
 
 [TECHNICAL SKILLS]
