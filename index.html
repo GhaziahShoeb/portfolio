@@ -1171,22 +1171,58 @@
       if(box) box.scrollTop = box.scrollHeight;
     }
 
-    log.textContent = "ghaziah@portfolio:~$ QnA Bot Online [v2.0 - NLP Portfolio Assistant]\nAsk any question (e.g. \"Does she know Python?\") or click a suggested topic above!";
+    log.textContent = "ghaziah@portfolio:~$ QnA Bot Online [Powered by Gemini LLM + RAG]\nAsk any question (e.g. \"Does she know Python?\") or click a suggested topic above!";
 
-    function processQuery(raw){
+    async function processQuery(raw){
       const q = raw.toLowerCase().trim();
       if(!q) return;
 
       if(q === 'clear'){
-        log.textContent = "ghaziah@portfolio:~$ QnA Bot Online [v2.0 - NLP Portfolio Assistant]\nAsk any question (e.g. \"Does she know Python?\") or click a suggested topic above!";
+        log.textContent = "ghaziah@portfolio:~$ QnA Bot Online [Powered by Gemini LLM + RAG]\nAsk any question (e.g. \"Does she know Python?\") or click a suggested topic above!";
         return;
       }
 
       appendLine('you:~$ ' + raw);
 
+      // System command quick check (instant)
       if(q in systemCommands){
         appendLine(systemCommands[q]());
         return;
+      }
+
+      // Show brief thinking status
+      appendLine('🤖 [Gemini LLM is thinking...]');
+
+      // 1. Try querying the serverless Gemini LLM backend
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: raw })
+        });
+
+        if(res.ok){
+          const data = await res.json();
+          if(data && data.answer && !data.fallback){
+            // Remove the thinking line and print LLM response
+            const lines = log.textContent.split('\n');
+            if(lines[lines.length - 1].includes('thinking...')){
+              lines.pop();
+              log.textContent = lines.join('\n');
+            }
+            appendLine(data.answer);
+            return;
+          }
+        }
+      } catch(err) {
+        // Network or local offline fallback
+      }
+
+      // 2. Fallback: Local Client-Side Engine (if API key not added yet or offline)
+      const lines = log.textContent.split('\n');
+      if(lines[lines.length - 1].includes('thinking...')){
+        lines.pop();
+        log.textContent = lines.join('\n');
       }
 
       const words = q.replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean);
