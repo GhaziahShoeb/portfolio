@@ -803,8 +803,8 @@
 <div>
 <p class="hi">hi! i'm</p>
 <p class="name display">Ghaziah Shoeb</p>
-<p class="role">TECH ENTHUSIAST</p>
-<p class="quote">"Driven by curiosity. Committed to becoming an exceptional engineer."</p>
+<p class="role">DATA ANALYST · AI &amp; ML</p>
+<p class="quote">"Transforming complex data into actionable insights. Building intelligent AI systems."</p>
 </div>
 </div>
 <div class="edu-row">
@@ -962,9 +962,10 @@
 <p class="works-title">QnA BOT</p>
 <div class="now-playing">
 <span class="now-dot"></span>
-<span>AI Assistant · Ask me anything about Ghaziah's skills, projects, and journey</span>
+<span>AI Assistant · Ask me anything about Ghaziah's data analytics, AI skills &amp; projects</span>
 </div>
 <div class="qna-chips">
+<button class="qna-chip" type="button" onclick="askQna('What are her data analytics &amp; SQL skills?')">Data Analyst &amp; SQL 📊</button>
 <button class="qna-chip" type="button" onclick="askQna('Does she know Python?')">Does she know Python? 🐍</button>
 <button class="qna-chip" type="button" onclick="askQna('What are her top skills?')">Skills &amp; Tech Stack 💻</button>
 <button class="qna-chip" type="button" onclick="askQna('What projects has she built?')">Projects 🚀</button>
@@ -1099,8 +1100,12 @@
     // Structured Knowledge Base
     const portfolioKB = {
       profile: {
-        keywords: ['who is', 'about her', 'who are you', 'introduce', 'whoami', 'bio', 'background'],
-        answer: "Ghaziah Shoeb is an engineer & tech enthusiast pursuing B.Tech in CSE at VIT Bhopal (2023–2027) with an 8.30/10.0 CGPA. She specializes in Agentic AI, Generative AI, RAG pipelines, and algorithmic problem solving."
+        keywords: ['who is', 'about her', 'who are you', 'introduce', 'whoami', 'bio', 'background', 'interest', 'domain', 'role', 'interest domain'],
+        answer: "Ghaziah Shoeb is an aspiring Data Analyst and AI Engineer pursuing B.Tech in CSE at VIT Bhopal (2023–2027) with an 8.30/10.0 CGPA. Her primary interest lies in Data Roles (Data Analyst, Business Analytics) and Artificial Intelligence (Agentic AI, RAG pipelines, Machine Learning)."
+      },
+      data: {
+        keywords: ['data', 'data analyst', 'analyst', 'analytics', 'analysis', 'business intelligence', 'bi', 'power bi', 'excel', 'visualization', 'dashboard'],
+        answer: "Ghaziah is strongly focused on Data Analyst & Business Intelligence roles! Her data skills include:\n• SQL & MySQL: Complex querying, joins, aggregations, data modeling & reporting\n• Power BI & Excel: Interactive dashboards, KPI tracking, and business metrics\n• Python for Data: NumPy, Pandas, exploratory data analysis, and predictive modeling\n• Projects: E-Commerce SQL Business Analytics, Logistics Tracking & Dashboards"
       },
       python: {
         keywords: ['python', 'py', 'pythonic', 'machine learning', 'ml', 'agentic', 'rag', 'llm', 'llms', 'generative', 'genai', 'ai'],
@@ -1154,7 +1159,7 @@
 
     const systemCommands = {
       help: () => "🤖 QnA Bot Commands & Questions:\n• Ask anything in natural language, e.g.:\n  - 'Does she know Python?'\n  - 'What are her top projects?'\n  - 'What is her CGPA & college?'\n  - 'Tell me about her certifications'\n  - 'How to contact her?'\n• Or use classic commands: whoami, skills, projects, achievements, contact, resume, coffee, sudo, date, clear",
-      whoami: () => "Ghaziah Shoeb — AI & Software Engineer, B.Tech CSE @ VIT Bhopal, 150+ LeetCode problems, builder of Agentic AI systems.",
+      whoami: () => "Ghaziah Shoeb — Data Analyst & AI Engineer, B.Tech CSE @ VIT Bhopal, 150+ LeetCode problems, passionate about Data Analytics, SQL, and Agentic AI.",
       skills: () => "Languages: Python, Java, SQL\nAI/ML: Agentic AI, Generative AI, RAG, LLMs, Prompt Engineering\nCore: DSA, OOPs\nTools: FastAPI, MySQL, Power BI, Excel, Git, AWS, Kali Linux",
       projects: () => "Featured Repos:\n• ai-clinic\n• agentic-dating\n• Indian-Logistics\n• ecommerce-sql\n• transformer\nFull code: github.com/GhaziahShoeb",
       achievements: () => "• OCF Shahjahanpur Summer Internship 2026\n• 150+ LeetCode problems solved\n• Conducted hackathons with 100+ teams",
