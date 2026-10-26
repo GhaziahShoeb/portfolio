@@ -20,7 +20,7 @@ Here is all the verified factual information about Ghaziah:
 - Tools & Frameworks: FastAPI, MySQL, Power BI, Excel, Git, AWS (Amazon Web Services), Kali Linux
 
 [ACHIEVEMENTS & LEETCODE]
-- LeetCode: Solved 150+ algorithmic problems (Profile: https://leetcode.com/u/Ghaziah/)
+- LeetCode: Solved 300+ algorithmic problems (Profile: https://leetcode.com/u/Ghaziah/)
 - Events: Conducted tech events and hackathons with 100+ participating teams
 - Internship: Selected for OCF Shahjahanpur Summer Internship Program 2026
 
