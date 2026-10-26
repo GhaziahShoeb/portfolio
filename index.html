@@ -430,7 +430,7 @@
   }
   @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
 
-  /* fake terminal */
+  /* QnA Bot / Terminal */
   .terminal-box{
     background:#22241a;
     border-radius:6px;
@@ -438,12 +438,16 @@
     font-family:'Space Mono', monospace;
     font-size:12px;
     color:#9fe1b0;
-    min-height:160px;
-    margin-bottom:26px;
+    min-height:180px;
+    max-height:340px;
+    overflow-y:auto;
+    margin-bottom:20px;
+    box-shadow:inset 0 0 12px rgba(0,0,0,0.45);
+    scroll-behavior:smooth;
   }
-  .terminal-log{ white-space:pre-wrap; line-height:1.6; margin-bottom:8px; }
-  .terminal-input-row{ display:flex; align-items:center; gap:6px; }
-  .terminal-prompt{ color:#df7a3e; }
+  .terminal-log{ white-space:pre-wrap; line-height:1.6; margin-bottom:10px; }
+  .terminal-input-row{ display:flex; align-items:center; gap:8px; }
+  .terminal-prompt{ color:#df7a3e; font-weight:700; }
   .terminal-input{
     background:transparent;
     border:none;
@@ -452,6 +456,45 @@
     font-family:'Space Mono', monospace;
     font-size:12px;
     flex:1;
+  }
+  .terminal-send-btn{
+    background:#df7a3e;
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    padding:5px 12px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .terminal-send-btn:hover{ background:#c8652d; transform:scale(1.03); }
+  .terminal-send-btn:active{ transform:scale(0.97); }
+
+  /* QnA Suggested Chips */
+  .qna-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .qna-chip{
+    background:var(--cream-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:6px 12px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .qna-chip:hover{
+    background:var(--olive);
+    color:#f4efdd;
+    border-color:var(--olive);
+    transform:translateY(-1px);
   }
 
   /* stat cards */
@@ -696,6 +739,12 @@
 <div class="dock-icon folder-ico"></div>
 <span class="dock-label">works</span>
 </button>
+<button class="dock-item" onclick="document.getElementById('funzone-section').scrollIntoView()">
+<div class="dock-icon bot-ico" style="background:#585a38;">
+<svg fill="none" height="24" stroke="#f4efdd" stroke-width="1.8" viewbox="0 0 24 24" width="24"><rect height="11" rx="3" width="18" x="3" y="10"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v3"></path><circle cx="8" cy="15" fill="#f4efdd" r="1.2"></circle><circle cx="16" cy="15" fill="#f4efdd" r="1.2"></circle><path d="M9 18h6" stroke-linecap="round"></path></svg>
+</div>
+<span class="dock-label">qna bot</span>
+</button>
 </div>
 <!-- RIGHT DOCK -->
 <div class="dock right">
@@ -900,26 +949,35 @@
 <a aria-label="X" class="social-btn x" href="https://x.com/GhaziahShoeb" rel="noopener" target="_blank"><svg fill="#fff" viewbox="0 0 24 24"><path d="M13.9 10.4L21 2h-2.2l-6.1 7.3L7.8 2H2l7.4 10.8L2 22h2.2l6.5-7.7L16.2 22H22l-8.1-11.6zm-2.3 2.7l-.8-1.1L5 3.7h2.5l4.8 6.9.8 1.1 6.3 9h-2.5l-5.3-7.6z"></path></svg></a>
 <a aria-label="Instagram" class="social-btn instagram" href="https://www.instagram.com/kaleja.chasni.aurbheja.fullfry/" rel="noopener" target="_blank"><svg fill="none" stroke="#fff" stroke-width="1.8" viewbox="0 0 24 24"><rect height="18" rx="5" width="18" x="3" y="3"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" fill="#fff" r="1" stroke="none"></circle></svg></a>
 </div>
-<!-- FUN ZONE SECTION -->
+<!-- QnA BOT SECTION -->
 <section class="section" id="funzone-section">
-<span class="section-label">05 · fun zone</span>
+<span class="section-label">05 · qna bot</span>
 <div class="window window-wide" data-drag="">
 <div class="window-bar" data-handle="">
-<span>C:\GHAZIAH\funzone</span>
+<span>C:\GHAZIAH\qna_bot.exe</span>
 <button class="window-close" data-close="">×</button>
 </div>
 <div class="window-body">
 <div class="works-flag"></div>
-<p class="works-title">FUN ZONE</p>
+<p class="works-title">QnA BOT</p>
 <div class="now-playing">
 <span class="now-dot"></span>
-<span>Now exploring: agentic RAG pipelines &amp; algorithmic problem solving</span>
+<span>AI Assistant · Ask me anything about Ghaziah's skills, projects, and journey</span>
+</div>
+<div class="qna-chips">
+<button class="qna-chip" type="button" onclick="askQna('Does she know Python?')">Does she know Python? 🐍</button>
+<button class="qna-chip" type="button" onclick="askQna('What are her top skills?')">Skills &amp; Tech Stack 💻</button>
+<button class="qna-chip" type="button" onclick="askQna('What projects has she built?')">Projects 🚀</button>
+<button class="qna-chip" type="button" onclick="askQna('What is her education and CGPA?')">Education &amp; CGPA 🎓</button>
+<button class="qna-chip" type="button" onclick="askQna('Where did she intern?')">Internship 💼</button>
+<button class="qna-chip" type="button" onclick="askQna('How can I contact her?')">Contact Info 📬</button>
 </div>
 <div class="terminal-box" id="terminal-box">
-<div class="terminal-log" id="terminal-log">ghaziah@portfolio:~$ type 'help' to get started</div>
+<div class="terminal-log" id="terminal-log"></div>
 <div class="terminal-input-row">
 <span class="terminal-prompt">&gt;</span>
-<input autocomplete="off" class="terminal-input" id="terminal-input" placeholder="whoami" type="text"/>
+<input autocomplete="off" class="terminal-input" id="terminal-input" placeholder="Ask a question (e.g. Does she know Python?)..." type="text"/>
+<button class="terminal-send-btn" id="terminal-send-btn" type="button">Ask ↵</button>
 </div>
 </div>
 <div class="stats-row">
@@ -1031,49 +1089,157 @@
 </div>
 <footer>© 2026 GHAZIAH SHOEB · BUILT WITH INTENTION</footer>
 <script>
-  /* ---------- FUN ZONE: FAKE TERMINAL ---------- */
+  /* ---------- QnA BOT: PORTFOLIO AI ASSISTANT ---------- */
   (function(){
     const log = document.getElementById('terminal-log');
     const input = document.getElementById('terminal-input');
+    const sendBtn = document.getElementById('terminal-send-btn');
     if(!log || !input) return;
 
-    const commands = {
-      help: `available commands: whoami, skills, projects, achievements, contact, resume, coffee, sudo, date, clear, help`,
-      whoami: `Ghaziah Shoeb — builder of agentic AI systems, solver of 150+ LeetCode problems, chronic tab-hoarder.`,
-      skills: `Java · Python · SQL · DSA · OOPs · Power BI · Excel · MySQL · RAG · Git · AWS`,
-      projects: `run 'window.open' in real life → check the "works" folder icon in the left dock for the full repo list.`,
-      achievements: `→ OCF Shahjahanpur Summer Internship 2026\n→ 150+ LeetCode problems solved\n→ Conducted tech events like hackathons with 100+ teams`,
-      contact: `email: ghaziah.socials@gmail.com · whatsapp: +91 8381849785`,
-      resume: `resume available in the "resume" folder — right dock, bottom icon.`,
-      coffee: `☕ brewing... error 418: I'm a teapot. try again after 2 more espresso shots.`,
-      sudo: `nice try. permission denied: you are not in the sudoers file. this incident will be reported to no one.`,
-      date: () => new Date().toString(),
+    // Structured Knowledge Base
+    const portfolioKB = {
+      profile: {
+        keywords: ['who is', 'about her', 'who are you', 'introduce', 'whoami', 'bio', 'background'],
+        answer: "Ghaziah Shoeb is an engineer & tech enthusiast pursuing B.Tech in CSE at VIT Bhopal (2023–2027) with an 8.30/10.0 CGPA. She specializes in Agentic AI, Generative AI, RAG pipelines, and algorithmic problem solving."
+      },
+      python: {
+        keywords: ['python', 'py', 'pythonic', 'machine learning', 'ml', 'agentic', 'rag', 'llm', 'llms', 'generative', 'genai', 'ai'],
+        answer: "Yes! Python is one of Ghaziah's primary languages. She uses it actively for:\n• Agentic AI & Generative AI workflows\n• RAG (Retrieval-Augmented Generation) pipelines & LLMs\n• Machine Learning (Certified in 'Applied Machine Learning in Python' by Univ of Michigan)\n• Problem solving & algorithmic scripting on LeetCode"
+      },
+      skills: {
+        keywords: ['skills', 'skill', 'tech stack', 'technologies', 'stack', 'languages', 'tools', 'what does she know', 'competencies'],
+        answer: "Ghaziah's core skills & tech stack:\n• Languages: Python, Java, SQL\n• AI/ML: Agentic AI, Generative AI, LLMs, RAG, Prompt Engineering\n• Core: Data Structures & Algorithms (DSA), OOPs\n• Frameworks & Tools: FastAPI, MySQL, Power BI, Excel, Git, AWS, Kali Linux"
+      },
+      java: {
+        keywords: ['java', 'oop', 'oops'],
+        answer: "Yes! Ghaziah is proficient in Java and Object-Oriented Programming (OOPs), utilizing Java for strong foundational software engineering and core data structure implementations."
+      },
+      sql: {
+        keywords: ['sql', 'mysql', 'database', 'databases', 'query'],
+        answer: "Yes, Ghaziah works with SQL and MySQL. She has built projects such as 'E-Commerce SQL Business Analytics' for querying complex business data, sales trends, and customer metrics."
+      },
+      dsa: {
+        keywords: ['dsa', 'leetcode', 'algorithms', 'problem solving', 'data structures', 'competitive'],
+        answer: "Ghaziah has solved 150+ problems on LeetCode with a strong grasp of Data Structures & Algorithms (arrays, trees, graphs, dynamic programming, and binary search). Profile: leetcode.com/u/Ghaziah/"
+      },
+      education: {
+        keywords: ['education', 'college', 'university', 'vit', 'bhopal', 'degree', 'study', 'studying', 'school', 'academics', 'cgpa', 'gpa', 'marks', 'btech', 'cse'],
+        answer: "Ghaziah is pursuing B.Tech in Computer Science & Engineering at VIT Bhopal (Batch of 2023–2027).\n• Current CGPA: 8.30 / 10.0\n• Focus: Software Engineering, AI/ML, and DSA"
+      },
+      experience: {
+        keywords: ['experience', 'internship', 'intern', 'work', 'job', 'ocf', 'shahjahanpur', 'company'],
+        answer: "Ghaziah was selected for the prestigious OCF Shahjahanpur Summer Internship Program 2026, gaining hands-on engineering and technical industry exposure."
+      },
+      projects: {
+        keywords: ['projects', 'project', 'github', 'portfolio', 'built', 'repos', 'repository', 'ai clinic', 'agentic dating', 'logistics', 'ecommerce'],
+        answer: "Key projects by Ghaziah:\n1. ai-clinic: AI-assisted clinical consultation & healthcare guidance system.\n2. agentic-dating: Multi-agent autonomous matching & conversational AI system.\n3. Indian-Logistics: End-to-end supply chain logistics analysis.\n4. ecommerce-sql: In-depth business intelligence & transaction analysis with SQL.\n5. transformer: Deep learning Transformer architecture implementation.\nCheck all repos at: github.com/GhaziahShoeb"
+      },
+      achievements: {
+        keywords: ['achievements', 'achievement', 'awards', 'hackathon', 'hackathons', 'events', 'organized', 'leadership'],
+        answer: "Notable achievements:\n• Selected for OCF Shahjahanpur Summer Internship 2026\n• Solved 150+ algorithmic problems on LeetCode\n• Successfully organized and conducted tech events & hackathons with 100+ participating teams"
+      },
+      certifications: {
+        keywords: ['certifications', 'certification', 'certificates', 'certificate', 'google', 'aws', 'michigan', 'badge', 'credly'],
+        answer: "Certifications held by Ghaziah:\n• Google IT Support Professional Certificate\n• Applied Machine Learning in Python — University of Michigan\n• AWS Educate: Getting Started with Compute Training Badge\nVerified badges available on Credly: credly.com/users/ghaziah-shoeb-23bhi10034"
+      },
+      contact: {
+        keywords: ['contact', 'email', 'mail', 'phone', 'call', 'whatsapp', 'reach', 'hire', 'location', 'where is she', 'bhopal', 'message', 'socials'],
+        answer: "You can connect with Ghaziah directly:\n• Email: ghaziah.socials@gmail.com\n• WhatsApp: +91 8381849785\n• Location: Bhopal, Madhya Pradesh, India\n• LinkedIn: linkedin.com/in/ghaziahshoeb\n• GitHub: github.com/GhaziahShoeb"
+      },
+      resume: {
+        keywords: ['resume', 'cv', 'curriculum vitae', 'download'],
+        answer: "Ghaziah's resume is available right on this page! You can click the '⭳ RESUME' button in the resume window or access it at:\ngithub.com/GhaziahShoeb/portfolio/blob/main/Ghaziah_Shoeb_resume.pdf"
+      }
+    };
+
+    const systemCommands = {
+      help: () => "🤖 QnA Bot Commands & Questions:\n• Ask anything in natural language, e.g.:\n  - 'Does she know Python?'\n  - 'What are her top projects?'\n  - 'What is her CGPA & college?'\n  - 'Tell me about her certifications'\n  - 'How to contact her?'\n• Or use classic commands: whoami, skills, projects, achievements, contact, resume, coffee, sudo, date, clear",
+      whoami: () => "Ghaziah Shoeb — AI & Software Engineer, B.Tech CSE @ VIT Bhopal, 150+ LeetCode problems, builder of Agentic AI systems.",
+      skills: () => "Languages: Python, Java, SQL\nAI/ML: Agentic AI, Generative AI, RAG, LLMs, Prompt Engineering\nCore: DSA, OOPs\nTools: FastAPI, MySQL, Power BI, Excel, Git, AWS, Kali Linux",
+      projects: () => "Featured Repos:\n• ai-clinic\n• agentic-dating\n• Indian-Logistics\n• ecommerce-sql\n• transformer\nFull code: github.com/GhaziahShoeb",
+      achievements: () => "• OCF Shahjahanpur Summer Internship 2026\n• 150+ LeetCode problems solved\n• Conducted hackathons with 100+ teams",
+      contact: () => "Email: ghaziah.socials@gmail.com | WhatsApp: +91 8381849785 | LinkedIn: linkedin.com/in/ghaziahshoeb",
+      resume: () => "Resume PDF available via '06 · resume' section or GitHub: github.com/GhaziahShoeb/portfolio",
+      coffee: () => "☕ brewing... error 418: I'm a teapot. Try again after 2 more espresso shots.",
+      sudo: () => "nice try. permission denied: you are not in the sudoers file. this incident will be reported to no one.",
+      date: () => new Date().toString()
     };
 
     function appendLine(text){
       log.textContent += '\n' + text;
-      log.scrollTop = log.scrollHeight;
+      const box = document.getElementById('terminal-box');
+      if(box) box.scrollTop = box.scrollHeight;
     }
+
+    log.textContent = "ghaziah@portfolio:~$ QnA Bot Online [v2.0 - NLP Portfolio Assistant]\nAsk any question (e.g. \"Does she know Python?\") or click a suggested topic above!";
+
+    function processQuery(raw){
+      const q = raw.toLowerCase().trim();
+      if(!q) return;
+
+      if(q === 'clear'){
+        log.textContent = "ghaziah@portfolio:~$ QnA Bot Online [v2.0 - NLP Portfolio Assistant]\nAsk any question (e.g. \"Does she know Python?\") or click a suggested topic above!";
+        return;
+      }
+
+      appendLine('you:~$ ' + raw);
+
+      if(q in systemCommands){
+        appendLine(systemCommands[q]());
+        return;
+      }
+
+      const words = q.replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean);
+      let bestCategory = null;
+      let highestScore = 0;
+
+      for(const [catKey, catData] of Object.entries(portfolioKB)){
+        if(!catData.keywords) continue;
+        let score = 0;
+        for(const kw of catData.keywords){
+          if(q.includes(kw)){
+            score += kw.length > 4 ? 3 : 2;
+          }
+          for(const w of words){
+            if(w === kw){
+              score += 2;
+            }
+          }
+        }
+        if(score > highestScore){
+          highestScore = score;
+          bestCategory = catKey;
+        }
+      }
+
+      if(highestScore >= 2 && bestCategory){
+        appendLine(portfolioKB[bestCategory].answer);
+      } else {
+        appendLine("🤖 I don't have a direct answer for that in Ghaziah's portfolio yet.\nTry asking:\n• 'Does she know Python?'\n• 'What are her top projects?'\n• 'What is her CGPA?'\n• 'Where did she intern?'\nOr reach her directly: ghaziah.socials@gmail.com");
+      }
+    }
+
+    window.askQna = function(question){
+      input.value = '';
+      processQuery(question);
+    };
 
     input.addEventListener('keydown', e => {
       if(e.key !== 'Enter') return;
       const raw = input.value.trim();
       if(!raw) return;
-      appendLine('ghaziah@portfolio:~$ ' + raw);
       input.value = '';
-
-      const cmd = raw.toLowerCase();
-      if(cmd === 'clear'){
-        log.textContent = "ghaziah@portfolio:~$ type 'help' to get started";
-        return;
-      }
-      if(cmd in commands){
-        const out = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
-        appendLine(out);
-      } else {
-        appendLine(`command not found: ${raw} — type 'help' for a list of commands`);
-      }
+      processQuery(raw);
     });
+
+    if(sendBtn){
+      sendBtn.addEventListener('click', () => {
+        const raw = input.value.trim();
+        if(!raw) return;
+        input.value = '';
+        processQuery(raw);
+      });
+    }
   })();
 
   /* ---------- FUN ZONE: RANDOM FACTS ---------- */
